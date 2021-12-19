@@ -5,8 +5,8 @@
   },
 
   "task": "clusterid_classification",
-  "model_name_or_path": "./roberta-base-local",
-  "tokenizer_name_or_path": "./roberta-base-local",
+  "model_name_or_path": "roberta-base",
+  "tokenizer_name_or_path": "roberta-base",
 
   "per_gpu_train_batch_size": 16,
   "per_gpu_eval_batch_size": 32,
