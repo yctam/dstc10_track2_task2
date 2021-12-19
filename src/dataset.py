@@ -365,8 +365,8 @@ class BaseDataset(torch.utils.data.Dataset):
         """
         Note: Since DSTC10 ASR transcripts are lower casing, so we intentionally lower case text
         """
-        return self.tokenizer.tokenize(text.lower())
-#        return self.tokenizer.tokenize(text)
+#        return self.tokenizer.tokenize(text.lower())
+        return self.tokenizer.tokenize(text)
 
     def _prepare_conversations(self):
         logger.info("Tokenize and encode the dialog data")
