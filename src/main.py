@@ -475,7 +475,7 @@ def main():
     # Evaluation
     result = {}
     if args.local_rank in [-1, 0]:
-        eval_dataset = dataset_class(dataset_args, tokenizer, split_type=args.eval_dataset, labels=not args.no_labels, labels_file=args.labels_file, text=args.field, last_turn_only=args.last_turn_only, disfluency_dict=disfluency_dict)
+        eval_dataset = dataset_class(dataset_args, tokenizer, split_type=args.eval_dataset, labels=not args.no_labels, labels_file=args.labels_file, text=args.field, last_turn_only=args.last_turn_only, disfluency_dict=args.disfluency_dict)
         result = evaluate(args, eval_dataset, model, tokenizer, run_batch_fn_eval, desc=args.eval_desc or "eval from the last epoch")
 
     return result
