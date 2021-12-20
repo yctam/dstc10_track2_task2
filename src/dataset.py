@@ -60,7 +60,7 @@ class BaseDataset(torch.utils.data.Dataset):
         # load dict if file provided (one word per line in file)
         self.disfluency_dict = {}
         if disfluency_dict:
-            with open(args.disfluency, "r") as F:
+            with open(disfluency_dict, "r") as F:
                 for word in F:
                     self.disfluency_dict[word.strip().lower()] = 1
 
