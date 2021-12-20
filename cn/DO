@@ -1,0 +1,35 @@
+data_root="../data"
+split="val_clean"
+K=1000
+cn_dir=mesh_${K}best.0.noref
+
+# You can exclude this line if you already installed Huggingface tranformers library for tokenization in dump_tk_nbest.py.
+source activate dstc10_task1 
+
+# dump nbest list from logs.json (last input argument is 0: don't tokenize)
+# So we don't tokenize the N-best lists.
+python dump_tk_nbest.py $data_root $split $K 0
+
+# prepare nbest-list file
+ls $data_root/$split/${K}best.0/*.txt > ${K}best.list.0
+
+# align nbest list
+mkdir -p $cn_dir
+
+# Align with human transcription below
+#./nbest-to-mesh -nbest-files ${K}best.list.0 -dictionary gdict.txt -refs $data_root/$split/tk_refs.txt -outdir $data_root/$split/mesh_${K}best.0
+
+# Align without human transcription below. The binary is precompiled.
+./nbest-to-mesh -nbest-files ${K}best.list.0 -dictionary gdict.txt  -outdir $cn_dir
+
+# generate CN list
+find $cn_dir -name "*.txt" > mesh_${K}best.noref.list
+
+# add confusion sets from task1 (Leave this as exercise to users)
+#cat ../task1/mesh_1000best.0.list mesh_${K}best.noref.list > mesh_${K}best.task12.noref.list
+
+# compute confusion matrix (word-pairs) 
+python word_confusion_noref.py mesh_${K}best.noref.list confusion_word_cnt_task2.noref.pkl
+
+# dump clean-to-noise letter seq training pairs
+python dump_s2s_data.py confusion_word_cnt_task2.noref.pkl > clean2noise.noref.txt
