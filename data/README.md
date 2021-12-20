@@ -5,4 +5,4 @@ Datasets for knowledge cluster classification:
 * dstc10val_dev50: test set in our paper
 
 title2cluster.json: Each title in knowledge.json is mapped into a cluster ID.
-cluster_map.json: Each title is associated with a cluster ID. Just for visualization. You may use this for other purposes.
+cluster_map.json: Each title (w/ entity added) is associated with a cluster ID. Just for visualization. You may use this for other purposes.
