@@ -15,3 +15,5 @@ Our code base is derived from https://github.com/alexa/alexa-with-dstc10-track2-
   year={2022}
 }
 ```
+
+A Huggingface model can be found here: https://huggingface.co/wilsontam/bert-base-uncased-dstc10-knowledge-cluster-classifier
